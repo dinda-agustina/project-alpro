@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
 using namespace std;
 
 const int CABANG = 5;
@@ -12,6 +15,18 @@ void inputPenjualan(int data[CABANG][HARI]) {
         for (int j = 0; j < HARI; j++) {
             cout << "  Hari " << j + 1 << ": ";
             cin >> data[i][j];
+        }
+    }
+}
+
+// ------------------- FUNGSI DATA DUMMY (OTOMATIS) -------------------
+void generateDummyData(int data[CABANG][HARI]) {
+    cout << "\nSedang mengacak data penjualan...\n";
+    cout << "Data berhasil diisi otomatis!\n";
+
+    for (int i = 0; i < CABANG; i++) {
+        for (int j = 0; j < HARI; j++) {
+            data[i][j] = 500000 + (rand() % 4500000); 
         }
     }
 }
@@ -110,12 +125,23 @@ void urutkanTotalCabang(int totalCabang[]) {
 //                          MAIN PROGRAM
 // =============================================================
 int main() {
+    srand(time(0));
     int data[CABANG][HARI];
     int totalCabang[CABANG], totalHari[HARI];
+    int pilihan, modeInput;
 
-    int pilihan;
+    cout << "=== PILIH MODE INPUT DATA ===\n";
+    cout << "1. Input Manual (Ketik satu-satu)\n";
+    cout << "2. Input Otomatis (Data Dummy/Acak)\n";
+    cout << "Pilihan: ";
+    cin >> modeInput;
 
-    inputPenjualan(data); // input awal data penjualan
+    if (modeInput == 1) {
+        inputPenjualan(data);
+    } else {
+        generateDummyData(data);
+        tampilkanTabel(data); 
+    }
 
     do {
         cout << "\n========= MENU =========\n";
