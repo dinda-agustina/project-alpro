@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
 #include <ctime>
 
@@ -38,10 +39,24 @@ void generateDummyData(int data[CABANG][HARI]) {
 // ------------------- FUNGSI TAMPILKAN TABEL -------------------
 void tampilkanTabel(int data[CABANG][HARI]) {
     cout << "\n=== TABEL PENJUALAN ===\n";
+    cout << left << setw(12) << " "; 
+
+    for (int j = 0; j < HARI; j++) {
+        cout << right << setw(9) << ("H-" + to_string(j + 1)); 
+    }
+    cout << endl;
+
+    cout << left << setw(12) << "-----------"; 
+    for (int j = 0; j < HARI; j++) {
+        cout << right << setw(9) << "--------"; 
+    }
+    cout << endl;
+
     for (int i = 0; i < CABANG; i++) {
-        cout << "Cabang " << i + 1 << " : ";
+        string label = "Cabang " + to_string(i + 1) + " :";
+        cout << left << setw(12) << label;
         for (int j = 0; j < HARI; j++) {
-            cout << data[i][j] << " ";
+            cout << right << setw(9) << data[i][j]; 
         }
         cout << endl;
     }
