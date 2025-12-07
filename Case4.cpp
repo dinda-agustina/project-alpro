@@ -6,6 +6,10 @@ using namespace std;
 
 const int CABANG = 5;
 const int HARI = 7;
+struct DataCabang {
+    int id;
+    int total;
+};
 
 // ------------------- FUNGSI INPUT DATA -------------------
 void inputPenjualan(int data[CABANG][HARI]) {
@@ -112,12 +116,33 @@ void cekHariDiBawahTarget(int data[CABANG][HARI]) {
 
 // ------------------- SORTING TOTAL CABANG -------------------
 void urutkanTotalCabang(int totalCabang[]) {
+    int tempTotal[CABANG];
+    int idCabang[CABANG]; 
+
+    for (int i = 0; i < CABANG; i++) {
+        tempTotal[i] = totalCabang[i];
+        idCabang[i] = i + 1; 
+    }
+
     for (int i = 0; i < CABANG - 1; i++) {
         for (int j = 0; j < CABANG - i - 1; j++) {
-            if (totalCabang[j] < totalCabang[j + 1]) {
-                swap(totalCabang[j], totalCabang[j + 1]);
+            if (tempTotal[j] < tempTotal[j + 1]) {
+                
+                int t = tempTotal[j];
+                tempTotal[j] = tempTotal[j + 1];
+                tempTotal[j + 1] = t;
+
+                int tID = idCabang[j];
+                idCabang[j] = idCabang[j + 1];
+                idCabang[j + 1] = tID;
             }
         }
+    }
+
+    cout << "\n=== PERINGKAT PENJUALAN (Tertinggi ke Terendah) ===\n";
+    for (int i = 0; i < CABANG; i++) {
+        cout << "Peringkat " << i + 1 << " : Cabang " << idCabang[i] 
+             << " (Total: " << tempTotal[i] << ")\n";
     }
 }
 
@@ -196,11 +221,6 @@ int main() {
         case 7:
             totalPerCabang(data, totalCabang);
             urutkanTotalCabang(totalCabang);
-            cout << "\nTotal cabang (diurutkan tertinggi → terendah):\n";
-            for (int i = 0; i < CABANG; i++) {
-                cout << totalCabang[i] << " ";
-            }
-            cout << endl;
             break;
 
         case 8:
