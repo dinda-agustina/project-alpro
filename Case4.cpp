@@ -157,7 +157,7 @@ void urutkanTotalCabang(int totalCabang[]) {
     cout << "\n=== PERINGKAT PENJUALAN (Tertinggi ke Terendah) ===\n";
     for (int i = 0; i < CABANG; i++) {
         cout << "Peringkat " << i + 1 << " : Cabang " << idCabang[i] 
-             << " (Total: " << tempTotal[i] << ")\n";
+            << " (Total: " << tempTotal[i] << ")\n";
     }
 }
 
